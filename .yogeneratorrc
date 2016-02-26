@@ -1,13 +1,28 @@
 {
-    "feature": [],
-    "controller": [],
-    "filter": [],
-    "directive": [],
-    "service": [],
-    "factory": [],
-    "provider": [],
-    "value": [],
-    "constant": [],
-    "view": [],
-    "sass": []
+  "feature": [
+    {
+      "name": "Home",
+      "value": "home"
+    }
+  ],
+  "controller": [
+    {
+      "name": "Home",
+      "value": "home"
+    }
+  ],
+  "filter": [],
+  "directive": [],
+  "service": [],
+  "factory": [],
+  "provider": [],
+  "value": [],
+  "constant": [],
+  "view": [
+    {
+      "name": "Home",
+      "value": "home"
+    }
+  ],
+  "sass": []
 }
