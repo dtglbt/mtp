@@ -11,10 +11,10 @@
         <!-- build:css(app) styles/bundle.css -->
         <link rel="stylesheet" href="styles/bundle.css">
         <!-- endbuild -->
-</head>
-  <!-- build:remove:mobile -->
-  <body ng-app="MTP">
+</head>  <!-- build:remove:web -->
+  <body>
   <!-- /build -->
+
     <!-- Add your site or application content here -->
     <div class="container" ng-view></div>
 
@@ -51,6 +51,11 @@
     <script src="scripts/directives/directives.js"></script>
     <!-- yo:directives -->
     <!-- endbuild -->
+
+    <!-- build:remove:web -->
+    <script src="js/index.js"></script>
+    <script src="cordova.js"></script>
+    <!-- /build -->
 
 </body>
 </html>
