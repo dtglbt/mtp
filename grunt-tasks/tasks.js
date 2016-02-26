@@ -8,6 +8,7 @@ module.exports = function(grunt) {
 
         
         grunt.task.run([
+            'processhtml:web',
             'register-git-hooks',
             'jshint',
             'bowerInstall',
@@ -41,20 +42,35 @@ module.exports = function(grunt) {
         'run-e2e'
     ]);
 
-    
-    grunt.registerTask('build',function(target) {
-        if( target ){
-            console.log('Building for ' + target);
+    /*
+        environment -> development|qa|staging|production
+        platform -> android|ios
+    */
+    grunt.registerTask('buildhybrid', function(environment, platform) {
+        grunt.task.run([
+            'build:' + environment + ':mobile',
+            'copy:hybrid',
+            'cordovacli:build_' + platform
+        ]);
+    });
+    /*
+        environment -> development|qa|staging|production
+        platform -> mobile|web
+    */
+    grunt.registerTask('build',function(environment, platform) {
+        if( environment ){
+            console.log('Building for ' + environment);
         }
 
         var tasks = [];
 
         tasks = tasks.concat([
+            'processhtml:' + platform,
             'jshint',
             'clean:dist',
             'bowerInstall',
             'compass:dist',
-            'ngconstant:production',
+            'ngconstant:' + environment,
             'useminPrepare',
             'concat',
             'concurrent:dist',
@@ -69,27 +85,27 @@ module.exports = function(grunt) {
         ]);
 
         
-        if (target === 'android') {
-            tasks = tasks.concat([
-                'clean:hybrid',
-                'cordovacli:cordova_android',
-                'clean:www',
-                'copy:hybrid',
-                'cordovacli:build_android',
-                'cordovacli:emulate_android'
-            ]);
-        }
+        // if (target === 'android') {
+        //     tasks = tasks.concat([
+        //         'clean:hybrid',
+        //         'cordovacli:cordova_android',
+        //         'clean:www',
+        //         'copy:hybrid',
+        //         'cordovacli:build_android',
+        //         'cordovacli:emulate_android'
+        //     ]);
+        // }
 
-        if (target === 'ios') {
-            tasks = tasks.concat([
-                'clean:hybrid',
-                'cordovacli:cordova_ios',
-                'clean:www',
-                'copy:hybrid',
-                'cordovacli:build_ios',
-                'cordovacli:emulate_ios'
-            ]);
-        }
+        // if (target === 'ios') {
+        //     tasks = tasks.concat([
+        //         'clean:hybrid',
+        //         'cordovacli:cordova_ios',
+        //         'clean:www',
+        //         'copy:hybrid',
+        //         'cordovacli:build_ios',
+        //         'cordovacli:emulate_ios'
+        //     ]);
+        // }
         
 
         grunt.task.run(tasks);
