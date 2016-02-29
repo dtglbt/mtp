@@ -3,10 +3,10 @@
 module.exports = function(grunt) {
 	grunt.registerTask('serve', function (target) {
         if (target === 'dist') {
-            return grunt.task.run(['build', 'open:dist', 'connect:dist:keepalive']);
+            return grunt.task.run(['build:development:web', 'open:dist', 'connect:dist:keepalive']);
         }
 
-        
+
         grunt.task.run([
             'processhtml:web',
             'register-git-hooks',
@@ -19,12 +19,12 @@ module.exports = function(grunt) {
             'ngconstant:development',
             'watch'
         ]);
-        
 
-        
+
+
     });
 
-    
+
 
     grunt.registerTask('run-e2e', [
         'connect:test',
@@ -84,7 +84,7 @@ module.exports = function(grunt) {
             'copy:dist'
         ]);
 
-        
+
         // if (target === 'android') {
         //     tasks = tasks.concat([
         //         'clean:hybrid',
@@ -106,13 +106,13 @@ module.exports = function(grunt) {
         //         'cordovacli:emulate_ios'
         //     ]);
         // }
-        
+
 
         grunt.task.run(tasks);
     });
-    
 
-    
+
+
 
     grunt.registerTask('register-git-hooks', [
         'githooks'
